@@ -20,9 +20,13 @@ server: {
 ```
 
 ## Run in dev env
-
 ```
 npm run dev
+```
+
+## Generate a new build
+```
+npm run build
 ```
 
 ## Vite documentation

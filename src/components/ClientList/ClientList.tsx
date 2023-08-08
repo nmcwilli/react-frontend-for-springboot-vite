@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-// import AppNavbar from './AppNavbar';
 import './ClientList.css';
 import { Link } from 'react-router-dom';
 
+/* tslint:disable:no-unused-variable */
 interface Client {
     id: number;
     // Add other properties here
@@ -18,7 +18,6 @@ class ClientList extends Component<Record<string, never>, ClientListState> {
     constructor(props: Record<string, never>) {
         super(props);
         this.state = { clients: [] };
-        this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
@@ -50,7 +49,6 @@ class ClientList extends Component<Record<string, never>, ClientListState> {
 
         return (
             <div>
-                
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success" tag={Link} to="/clients/new">Add Client</Button>
