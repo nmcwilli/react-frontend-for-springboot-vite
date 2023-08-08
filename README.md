@@ -19,6 +19,12 @@ server: {
   },
 ```
 
+## Run in dev env
+
+```
+npm run dev
+```
+
 ## Vite documentation
 
 Currently, two official plugins are available:
