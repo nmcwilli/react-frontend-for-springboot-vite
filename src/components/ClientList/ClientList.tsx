@@ -13,8 +13,8 @@ interface ClientListState {
   clients: Client[];
 }
 
-class ClientList extends Component<{}, ClientListState> {
-  constructor(props: {}) {
+class ClientList extends Component<Record<string, never>, ClientListState> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = { clients: [] };
     this.remove = this.remove.bind(this);
@@ -26,7 +26,7 @@ class ClientList extends Component<{}, ClientListState> {
       .then((data: Client[]) => this.setState({ clients: data }));
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<void> {
     await fetch(`/clients/${id}`, {
       method: 'DELETE',
       headers: {
@@ -34,41 +34,39 @@ class ClientList extends Component<{}, ClientListState> {
         'Content-Type': 'application/json',
       },
     }).then(() => {
-      let updatedClients = [...this.state.clients].filter((i) => i.id !== id);
+      const updatedClients = this.state.clients.filter((i) => i.id !== id);
       this.setState({ clients: updatedClients });
     });
   }
 
-  render() {
+  render(): JSX.Element {
     const { clients } = this.state;
 
-    const clientList = clients.map((client) => {
-      return (
-        <tr key={client.id}>
-          <td style={{ whiteSpace: 'nowrap' }}>{client.name}</td>
-          <td>{client.email}</td>
-          <td>
-            <ButtonGroup>
-              <Button
-                size="sm"
-                color="primary"
-                tag={Link}
-                to={`/clients/${client.id}`}
-              >
-                Edit
-              </Button>
-              <Button
-                size="sm"
-                color="danger"
-                onClick={() => this.remove(client.id)}
-              >
-                Delete
-              </Button>
-            </ButtonGroup>
-          </td>
-        </tr>
-      );
-    });
+    const clientList = clients.map((client) => (
+      <tr key={client.id}>
+        <td style={{ whiteSpace: 'nowrap' }}>{client.name}</td>
+        <td>{client.email}</td>
+        <td>
+          <ButtonGroup>
+            <Button
+              size="sm"
+              color="primary"
+              tag={Link}
+              to={`/clients/${client.id}`}
+            >
+              Edit
+            </Button>
+            <Button
+              size="sm"
+              color="danger"
+              onClick={() => this.remove(client.id)}
+            >
+              Delete
+            </Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    ));
 
     return (
       <div>
@@ -83,9 +81,9 @@ class ClientList extends Component<{}, ClientListState> {
           <Table className="mt-4">
             <thead>
               <tr>
-                <th width="30%">Name</th>
-                <th width="30%">Email</th>
-                <th width="40%">Actions</th>
+                <th className="th-width-small">Name</th>
+                <th className="th-width-med">Email</th>
+                <th className="th-width-large">Actions</th>
               </tr>
             </thead>
             <tbody>{clientList}</tbody>
