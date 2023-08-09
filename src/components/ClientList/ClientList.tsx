@@ -26,18 +26,41 @@ class ClientList extends Component<Record<string, never>, ClientListState> {
             .then((data: Client[]) => this.setState({ clients: data }));
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    remove(id: number) {
-        // Implement your remove logic here
-    }
+    async remove(id: number) {
+        try {
+            const response = await fetch(`/clients/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                console.error('Failed to delete client:', response.status, response.statusText);
+                // Handle error case if needed
+                return;
+            }
+    
+            const updatedClients = this.state.clients.filter(i => i.id !== id);
+            this.setState({ clients: updatedClients });
+        } catch (error) {
+            console.error('An error occurred while deleting the client:', error.message);
+            // Handle error case if needed
+        }
+    }    
 
     render() {
-        const { clients } = this.state;
-
-        const clientList = clients.map((client) => (
+        const { clients, isLoading } = this.state;
+    
+        if (isLoading) {
+            return <p>Loading...</p>;
+        }
+    
+        const clientList = clients.map(client => (
             <tr key={client.id}>
-                <td>{client.id}</td>
-                {/* Render other properties of the client */}
+                <td style={{ whiteSpace: 'nowrap' }}>{client.name}</td>
+                <td>{client.email}</td>
                 <td>
                     <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={"/clients/" + client.id}>Edit</Button>
@@ -46,30 +69,31 @@ class ClientList extends Component<Record<string, never>, ClientListState> {
                 </td>
             </tr>
         ));
-
+    
         return (
             <div>
+                
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success" tag={Link} to="/clients/new">Add Client</Button>
                     </div>
-                    <h3>Client List</h3>
+                    <h3>Clients</h3>
                     <Table className="mt-4">
                         <thead>
-                            <tr>
-                                <th className="th-width-small">ID</th>
-                                {/* Add table headers for other properties */}
-                                <th className="th-width-med">Actions</th>
-                            </tr>
+                        <tr>
+                            <th width="30%">Name</th>
+                            <th width="30%">Email</th>
+                            <th width="40%">Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {clientList}
+                        {clientList}
                         </tbody>
                     </Table>
                 </Container>
             </div>
         );
-    }
+    }    
 }
 
 export default ClientList;
