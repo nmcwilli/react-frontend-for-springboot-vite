@@ -10,7 +10,7 @@ Vite.config.js updated to include proxy for back-end. Update accordingly to wher
 ```
 server: {
     proxy: {
-      "/clients": {
+      "/api": {
         target: "http://localhost:8080",
         changeOrigin: true,
         secure: false,
