@@ -1,29 +1,19 @@
-import React, { Component, SyntheticEvent } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import React, { Component } from 'react';
+import AppNavbar from '../AppNavbar/AppNavbar';
 import { Link } from 'react-router-dom';
+import { Button, Container } from 'reactstrap';
 
-interface AppNavbarState {
-    isOpen: boolean;
-}
-
-export default class AppNavbar extends Component<{}, AppNavbarState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = { isOpen: false };
-        this.toggle = this.toggle.bind(this);
-    }
-
-    toggle() {
-        this.setState(prevState => ({
-            isOpen: !prevState.isOpen
-        }));
-    }
-
+class Home extends Component {
     render() {
         return (
-            <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
-            </Navbar>
+            <div>
+                <AppNavbar />
+                <Container fluid>
+                    <Button color="link"><Link to="/clients">Clients</Link></Button>
+                </Container>
+            </div>
         );
     }
 }
+
+export default Home;

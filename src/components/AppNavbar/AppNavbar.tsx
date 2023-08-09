@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { useLocation } from 'react-router-dom';
 
-interface AppNavbarState {
-    isOpen: boolean;
-}
+const AppNavbar: React.FC = () => {
+    const location = useLocation();
 
-export default class AppNavbar extends Component<{}, AppNavbarState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = { isOpen: false };
-        this.toggle = this.toggle.bind(this);
-    }
+    return (
+        <Navbar color="dark" dark expand="md">
+            <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+            <Nav className="ml-auto" navbar>
+                <NavItem>
+                    <NavLink
+                        to="/clients"
+                        className={`nav-link${location.pathname === '/clients' ? ' active' : ''}`}
+                    >
+                        Clients
+                    </NavLink>
+                </NavItem>
+                {/* Add more NavItems as needed */}
+            </Nav>
+        </Navbar>
+    );
+};
 
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
-
-    render() {
-        return (
-            <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
-            </Navbar>
-        );
-    }
-}
+export default AppNavbar;
