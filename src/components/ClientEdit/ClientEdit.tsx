@@ -24,7 +24,7 @@ const ClientEdit: React.FC = () => {
 
     const fetchClient = async () => {
         try {
-            const response = await fetch(`/clients/${id}`);
+            const response = await fetch(`/api/clients/${id}`);
             
             if (!response.ok) {
                 throw new AppError(`Failed to fetch client: ${response.statusText}`, response.status);
@@ -58,7 +58,7 @@ const ClientEdit: React.FC = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('/clients' + (item.id ? '/' + item.id : ''), {
+            const response = await fetch('/api/clients' + (item.id ? '/' + item.id : ''), {
                 method: item.id ? 'PUT' : 'POST',
                 headers: {
                     'Accept': 'application/json',
