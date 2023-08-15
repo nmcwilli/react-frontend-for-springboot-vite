@@ -4,13 +4,15 @@ This is a template front-end using React + TypeScript + Vite for my Spring Boot 
 
 It provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+In order for it to function properly, my Spring Boot backend must be up and running at localhost:8080 or whatever port you specify. 
+
 ## Config
 
 Vite.config.js updated to include proxy for back-end. Update accordingly to wherever back-end API is hosted. 
 ```
 server: {
     proxy: {
-      "/api": {
+      "/api/v1": {
         target: "http://localhost:8080",
         changeOrigin: true,
         secure: false,
@@ -19,14 +21,14 @@ server: {
   },
 ```
 
-## Run in dev env
-```
-npm run dev
-```
-
 ## Generate a new build
 ```
 npm run build
+```
+
+## Run in dev env
+```
+npm run dev
 ```
 
 ## Vite documentation
