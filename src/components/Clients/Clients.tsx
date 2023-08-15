@@ -14,7 +14,7 @@ function Clients() {
   useEffect(() => {
     async function fetchClients() {
       try {
-        const response = await fetch('/api/clients', {
+        const response = await fetch('/api/v1/clients', {
           headers: {
             Accept: 'application/json'
           }

@@ -24,7 +24,7 @@ const ClientEdit: React.FC = () => {
 
     const fetchClient = async () => {
         try {
-            const response = await fetch(`/api/clients/${id}`);
+            const response = await fetch(`/api/v1/clients/${id}`);
             
             if (!response.ok) {
                 throw new AppError(`Failed to fetch client: ${response.statusText}`, response.status);
