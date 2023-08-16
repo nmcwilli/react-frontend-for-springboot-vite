@@ -58,7 +58,7 @@ const ClientEdit: React.FC = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('/api/clients' + (item.id ? '/' + item.id : ''), {
+            const response = await fetch('/api/v1/clients' + (item.id ? '/' + item.id : ''), {
                 method: item.id ? 'PUT' : 'POST',
                 headers: {
                     'Accept': 'application/json',
