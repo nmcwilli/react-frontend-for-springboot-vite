@@ -1,4 +1,4 @@
-# React + TypeScript + Vite Frontend for Spring Boot app
+# React + TypeScript + Vite Frontend
 
 This is a template front-end using React + TypeScript + Vite for my Spring Boot back-end. 
 
