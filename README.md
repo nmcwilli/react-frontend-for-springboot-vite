@@ -6,6 +6,11 @@ It provides a minimal setup to get React working in Vite with HMR and some ESLin
 
 In order for it to function properly, my Spring Boot backend must be up and running at localhost:8080 or whatever port you specify. 
 
+## Integrating with a Backend 
+
+This project integrates well with my sample Java Spring Boot backend:
+https://github.com/nmcwilli/rest-service-springboot
+
 ## Config
 
 Vite.config.js updated to include proxy for back-end. Update accordingly to wherever back-end API is hosted. 
